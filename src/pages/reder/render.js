@@ -5,6 +5,7 @@ import "./render.css"
 export default function Render() {
     const [current,setCurrent] = useState(0)
     const steps = useSelector((state)=>state?.stepcounter)
+    console.log("steps",steps)
     const next = () => {
         setCurrent(current + 1);
     };

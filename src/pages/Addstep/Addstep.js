@@ -8,31 +8,28 @@ import * as React from "react";
 function Addstep() {
     const steps = useSelector((state)=> state?.stepcounter)
     const dispatch = useDispatch()
-    const items = (id) => {
-        return [{
-        label: <span className={"btn"} onClick={()=>{addinputes(id)}}>Text</span>,
-        key: '0',
-    }]
-    }
         return(
         <div className='d-flex justify-content-center align-items-end'>
             <div>
                 {steps?.map((step,i)=>{
-                    let data = items(i)
+                    let index = i
                     return(<div key={i} className='input-box'>
-                        <Dropdown
-                            menu={{data}}
-                            trigger={['click']}
-                        >
-                            <a onClick={(e) => e.preventDefault()}>
+                        <Dropdown menu={{ items : [{
+                                label: <span className={"btn"} onClick={()=>dispatch(addinputes(i))} >Text</span>,
+                                key: '0',
+                            }]}} trigger={['click']}>
+                            <a onClick={e => e.preventDefault()}>
                                 <Space>
                                     <PlusOutlined className="add-on" />
                                 </Space>
                             </a>
                         </Dropdown>
-                        {step?.comman.map((z)=>{
-                            return(<Inputs type={z.type} value={z.value}  />)
-                        })}
+                        <div className='set-fild w-100'>
+                            {step?.comman.map((z,i)=>{
+                                return(<Inputs type={z.type} value={z.value} key={i} index2={index} index={i}/>)
+                            })}
+                        </div>
+
                     </div>)
                 })}
             </div>
