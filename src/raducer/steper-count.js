@@ -5,7 +5,8 @@ const initialState = [{
     comman:[
         {
             type : "text",
-            value : "name"
+            value : "",
+            placeholder : "Type here"
         }
     ]
 }]
@@ -19,15 +20,18 @@ const initialState = [{
                 {count:state.length+1,comman:[
                     {
                         type : "text",
-                        value : "name"
+                        value : "",
+                        placeholder : "Type here"
                     }
                 ]})
         },
         addinputes:(state,action)=>{
-            state[action.payload]={...state[action.payload],comman:[...state[action.payload]?.comman,
+            const {index,type,placeholder} = action.payload
+            state[index]={...state[index],comman:[...state[index]?.comman,
                     {
-                        type : "text",
-                        value : "name"
+                        type : type,
+                        value : "",
+                        placeholder : placeholder
                     }
                 ]}
         },

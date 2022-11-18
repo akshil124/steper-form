@@ -1,8 +1,26 @@
-nav ul{
+.Link_routes  ul{
     display: flex;
     justify-content: center;
 }
-ul li{
+.Link_routes ul li{
     list-style: none;
     margin: 10px;
+}
+.h1{
+    font-size: 30px !important;
+}
+.h2{
+    font-size: 25px !important;
+}
+.h3{
+    font-size: 20px !important;
+}
+.h4{
+     font-size: 15px !important;
+}
+.h5{
+    font-size: 12px !important;
+}
+.h6{
+    font-size: 10px !important;
 }

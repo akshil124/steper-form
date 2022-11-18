@@ -3,7 +3,7 @@ import "./index.css"
 export default function Home() {
     return (
         <div>
-            <nav>
+            <nav className="Link_routes">
                 <ul>
                     <li>
                         <NavLink
