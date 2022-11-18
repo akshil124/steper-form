@@ -49,7 +49,7 @@ function Addstep() {
                                     />
                                 }
                             ]
-                        }} trigger={['click']}>
+                        }} trigger={['hover']}>
                             <a onClick={e => e.preventDefault()}>
                                 <Space>
                                     <PlusOutlined className="add-on"/>
