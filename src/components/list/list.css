@@ -1,0 +1,7 @@
+input.list-input{
+    width: 100%;
+    border: none;
+}
+input.list-input:focus{
+    outline: none;
+}

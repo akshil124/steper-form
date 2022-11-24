@@ -6,7 +6,7 @@ const initialState = [{
         {
             type : "text",
             value : "",
-            placeholder : "Type here"
+            placeholder : "Type text"
         }
     ]
 }]
@@ -37,11 +37,30 @@ const initialState = [{
         },
         Inputvalues :(state,action)=>{
             state[action.payload?.mainid].comman[action.payload?.index].value = action.payload?.value
+        },
+        deleteinput:(state,action)=>{
+            state[action.payload?.mainid].comman.splice(action.payload?.index,1)
+        },
+        upshift:(state,action)=>{
+            state[action.payload?.mainid].comman.splice(action?.payload?.index,1)
+            state[action.payload?.mainid].comman.splice(action.payload.index-1,0,action?.payload?.data)
+        },
+        downshift:(state,action)=>{
+            state[action.payload?.mainid].comman.splice(action?.payload?.index,1)
+            state[action.payload?.mainid].comman.splice(action.payload.index+1,0,action?.payload?.data)
+        },
+        addlist:(state,action)=>{
+            state[action.payload?.index].comman.push({
+                type:action?.payload?.type,
+                lists:[
+                    {count:1,value:""}
+                ]
+            })
         }
     },
 })
 
 // Action creators are generated for each case reducer function
-export const { increment ,addinputes,Inputvalues } = stepcounter.actions
+export const { increment ,addinputes,Inputvalues,deleteinput,upshift,downshift,addlist } = stepcounter.actions
 
 export default stepcounter.reducer
