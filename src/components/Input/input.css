@@ -1,0 +1,12 @@
+.on-hover{
+    /*visibility: hidden;*/
+}
+.dropdown-icon{
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+.dropdown-box{
+    display: flex;
+    align-items: center;
+    color: #000000;
+}

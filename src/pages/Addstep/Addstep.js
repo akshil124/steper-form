@@ -5,7 +5,6 @@ import {useSelector, useDispatch} from 'react-redux'
 import {increment, addinputes} from "../../raducer/steper-count";
 import Inputs from "../../components/Input/input";
 import './Addstep.css'
-import {autoBatchEnhancer} from "@reduxjs/toolkit";
 
 function Addstep() {
     const steps = useSelector((state) => state?.stepcounter)
@@ -21,9 +20,6 @@ function Addstep() {
     }
 
     let items = []
-    //     getItem('Heading', 'sub1',null , [
-    //         getItem('Item 1', null, null, [getItem('Option 1', '1'), getItem('Option 2', '2')], 'group'),
-    //     ])]
 
     const dispatch = useDispatch()
     return (
@@ -72,9 +68,6 @@ function Addstep() {
                 <PlusOutlined style={{color: "#ffffff", fontSize: "25px"}} onClick={() => dispatch(increment())}/>
             </div>
 
-            {/*<Link className="plus-box" to={"/render"}>*/}
-            {/*    reander*/}
-            {/*</Link>*/}
         </div>
 
     )
