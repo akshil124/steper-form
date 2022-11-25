@@ -20,7 +20,7 @@ function Addstep() {
     }
 
     let items = []
-
+    console.log("step",steps)
     const AddStep=(data,index,mainindex)=>{
         const {type,value,placeholder,lists} = data
         if(type === "text" || type === "text" ||type === "h1" || type === "h2" || type === "h3" || type === "h4" || type === "h5" || type === "h6"){
@@ -29,8 +29,8 @@ function Addstep() {
         else if(type ==="list"){
             return (
                 <div>
-                    {lists.map((list)=>{
-                        return <List/>
+                    {lists.map((list,i)=>{
+                        return <List list={list} index={i} mainid={mainindex} secondid={index}/>
                     })}
                 </div>
             )

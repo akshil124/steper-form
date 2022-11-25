@@ -7,6 +7,9 @@ export default function RenderElement(props) {
         case "h4" : return <h4 className={'mb-2'}>{props?.value}</h4>
         case "h5" : return <h5 className={'mb-2'}>{props?.value}</h5>
         case "h6" : return <h6 className={'mb-2'}>{props?.value}</h6>
+        case "list" : return props.list.map((list)=>{
+                                return <p>{list?.value}</p>
+                             })
         default : break
     }
 }
