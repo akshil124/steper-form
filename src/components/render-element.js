@@ -10,6 +10,7 @@ export default function RenderElement(props) {
         case "list" : return props.list.map((list)=>{
                                 return <p>{list?.value}</p>
                              })
+        case "file" : return <div><img src={props?.url} width={"500px"} height={"300px"}/></div>
         default : break
     }
 }

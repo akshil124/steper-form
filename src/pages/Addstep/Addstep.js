@@ -1,11 +1,12 @@
 import React from "react";
 import {Dropdown, Space, Menu} from 'antd';
-import {PlusOutlined, FileTextOutlined,OrderedListOutlined} from "@ant-design/icons"
+import {PlusOutlined, FileTextOutlined,OrderedListOutlined,FileImageOutlined} from "@ant-design/icons"
 import {useSelector, useDispatch} from 'react-redux'
-import {increment, addinputes,addlist} from "../../raducer/steper-count";
+import {increment, addinputes,addlist,uploadimg} from "../../raducer/steper-count";
 import Inputs from "../../components/Input/input";
 import './Addstep.css'
 import List from "../../components/list/list";
+import Uploads from "../../components/upload/upload";
 
 function Addstep() {
     const steps = useSelector((state) => state?.stepcounter)
@@ -20,9 +21,9 @@ function Addstep() {
     }
 
     let items = []
-    console.log("step",steps)
     const AddStep=(data,index,mainindex)=>{
-        const {type,value,placeholder,lists} = data
+        const {type,value,placeholder,lists,url} = data
+    console.log("step",data)
         if(type === "text" || type === "text" ||type === "h1" || type === "h2" || type === "h3" || type === "h4" || type === "h5" || type === "h6"){
             return  <Inputs type={type} value={value} placeholder={placeholder}  index2={mainindex} index={index}/>
         }
@@ -34,6 +35,8 @@ function Addstep() {
                     })}
                 </div>
             )
+        }else if(type==="file"){
+            return <Uploads data={data} mainid={mainindex} index={index} type={type} url={url}/>
         }
     }
 
@@ -64,6 +67,11 @@ function Addstep() {
                                     label: <span className={"btn dropdown"}
                                                  onClick={() => dispatch(addlist({index:i,type:"list"}))}><OrderedListOutlined className="me-1"/>list</span>,
                                     key: '3',
+                                },
+                                {
+                                    label: <span className={"btn dropdown"}
+                                                 onClick={() => dispatch(uploadimg({index:i,type:"file"}))}><FileImageOutlined className="me-1"/>Image</span>,
+                                    key: '4',
                                 }
                             ]
                         }} trigger={['hover']}>

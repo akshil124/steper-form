@@ -76,11 +76,22 @@ const initialState = [{
             state[mainid].comman[secondid].lists.splice(index,1)
             console.log("sdfg",state[mainid].comman[secondid].lists[state[mainid].comman[secondid].lists.length])
             state[mainid].comman[secondid].lists[state[mainid].comman[secondid].lists.length-1].focus = true
+        },
+        uploadimg:(state,action)=>{
+            const {index,type}=action?.payload
+            state[index].comman.push({
+                type:type,
+                url:""
+            })
+        },
+        addimgurl:(state,action)=>{
+            const {index,url,mainid}=action.payload
+            state[mainid].comman[index].url=url
         }
     },
 })
 
 // Action creators are generated for each case reducer function
-export const { increment ,addinputes,Inputvalues,deleteinput,upshift,downshift,addlist,addlistvalue,addlistinput,removelistinput } = stepcounter.actions
+export const { increment ,addinputes,Inputvalues,deleteinput,upshift,downshift,addlist,addlistvalue,addlistinput,removelistinput,uploadimg,addimgurl } = stepcounter.actions
 
 export default stepcounter.reducer
