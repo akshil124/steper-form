@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit'
+import table from "../components/table/table";
 
 const initialState = [{
     count:1,
@@ -87,11 +88,49 @@ const initialState = [{
         addimgurl:(state,action)=>{
             const {index,url,mainid}=action.payload
             state[mainid].comman[index].url=url
+        },
+        addtable:(state,action)=>{
+            const {index,type} = action.payload
+            state[index].comman.push({
+                type:type,
+                table:[
+                    {   type:"th",
+                        row:[
+                            {value:""},
+                            {value:""},
+                        ]
+                    },
+                    {
+                        row:[
+                            {value:""},
+                            {value:""},
+                        ]
+                    },
+                ]
+            })
+        },
+        addtablevalue:(state,action)=>{
+            const { stateid,commanid,tableid,rowid,value}=action.payload
+            state[stateid].comman[commanid].table[tableid].row[rowid].value = value
+        },
+        addtablerow:(state,action)=>{
+            const { stateid,commanid,} = action.payload
+            state[stateid].comman[commanid].table = state[stateid].comman[commanid].table.map(i=> {
+                return {...i,row:[...i.row,{value:""}]}
+            } )
+        },
+        addtablecolumn:(state,action)=>{
+            const { stateid,commanid,} = action.payload
+            state[stateid].comman[commanid].table.push({
+                row: state[stateid].comman[commanid].table[0].row.map(()=>{
+                    return {value:""}
+                })
+            })
         }
     },
 })
 
 // Action creators are generated for each case reducer function
-export const { increment ,addinputes,Inputvalues,deleteinput,upshift,downshift,addlist,addlistvalue,addlistinput,removelistinput,uploadimg,addimgurl } = stepcounter.actions
+export const { increment ,addinputes,Inputvalues,deleteinput,upshift,downshift,addlist,addlistvalue,addlistinput,removelistinput,uploadimg,addimgurl ,addtable,addtablevalue,addtablerow,addtablecolumn} = stepcounter.actions
 
 export default stepcounter.reducer

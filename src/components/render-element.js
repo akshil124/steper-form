@@ -11,6 +11,18 @@ export default function RenderElement(props) {
                                 return <p>{list?.value}</p>
                              })
         case "file" : return <div><img src={props?.url} width={"500px"} height={"300px"}/></div>
+        case "table" : return   <table border={1} className="w-50">
+                                    {props?.table.map((column)=>{
+                                        return <tr>{column.row.map((row)=>{
+                                            if(column?.type==="th"){
+                                                return <th>{row?.value}</th>
+                                            }else {
+                                                return  <td>{row?.value}</td>
+                                            }
+                                        })}</tr>
+                                    })}
+                                </table>
+
         default : break
     }
 }

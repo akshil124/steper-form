@@ -21,6 +21,7 @@
 }
 .on-hover-box .ant-dropdown-menu{
     display: flex;
+    padding: 4px 0px !important;
 }
 .disable{
     pointer-events: none;

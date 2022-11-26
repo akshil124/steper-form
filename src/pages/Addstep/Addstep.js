@@ -1,12 +1,13 @@
 import React from "react";
 import {Dropdown, Space, Menu} from 'antd';
-import {PlusOutlined, FileTextOutlined,OrderedListOutlined,FileImageOutlined} from "@ant-design/icons"
+import {PlusOutlined, FileTextOutlined,OrderedListOutlined,FileImageOutlined,TableOutlined} from "@ant-design/icons"
 import {useSelector, useDispatch} from 'react-redux'
-import {increment, addinputes,addlist,uploadimg} from "../../raducer/steper-count";
+import {increment, addinputes,addlist,uploadimg,addtable} from "../../raducer/steper-count";
 import Inputs from "../../components/Input/input";
-import './Addstep.css'
 import List from "../../components/list/list";
 import Uploads from "../../components/upload/upload";
+import Table from "../../components/table/table"
+import './Addstep.css'
 
 function Addstep() {
     const steps = useSelector((state) => state?.stepcounter)
@@ -25,18 +26,20 @@ function Addstep() {
         const {type,value,placeholder,lists,url} = data
     console.log("step",data)
         if(type === "text" || type === "text" ||type === "h1" || type === "h2" || type === "h3" || type === "h4" || type === "h5" || type === "h6"){
-            return  <Inputs type={type} value={value} placeholder={placeholder}  index2={mainindex} index={index}/>
+            return  <Inputs type={type} key={index} value={value} placeholder={placeholder}  index2={mainindex} index={index}/>
         }
         else if(type ==="list"){
             return (
-                <div>
+                <div key={index}>
                     {lists.map((list,i)=>{
-                        return <List list={list} index={i} mainid={mainindex} secondid={index}/>
+                        return <List list={list} key={i} index={i} mainid={mainindex} secondid={index}/>
                     })}
                 </div>
             )
         }else if(type==="file"){
-            return <Uploads data={data} mainid={mainindex} index={index} type={type} url={url}/>
+            return <Uploads key={index} data={data} mainid={mainindex} index={index} type={type} url={url}/>
+        }else if(type==="table"){
+             return <Table key={index} mainid={mainindex} index={index} data={data} />
         }
     }
 
@@ -72,6 +75,11 @@ function Addstep() {
                                     label: <span className={"btn dropdown"}
                                                  onClick={() => dispatch(uploadimg({index:i,type:"file"}))}><FileImageOutlined className="me-1"/>Image</span>,
                                     key: '4',
+                                },
+                                {
+                                    label: <span className={"btn dropdown"}
+                                                 onClick={() => dispatch(addtable({index:i,type:"table"}))}><TableOutlined className="me-1"/>Table</span>,
+                                    key: '5',
                                 }
                             ]
                         }} trigger={['hover']}>

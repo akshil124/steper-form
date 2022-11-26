@@ -19,7 +19,7 @@ export default function Render() {
         <div className={"container"}>
             <Steps current={current} items={items} />
             <div className="steps-content">{steps[current].comman.map((data,i)=>{
-                return <RenderElement type={data?.type} value={data?.value} list={data?.lists} url={data?.url} key={i} />
+                return <RenderElement type={data?.type} value={data?.value} list={data?.lists} url={data?.url} table={data?.table} key={i} />
             })}</div>
             <div className="steps-action">
                     <Button
