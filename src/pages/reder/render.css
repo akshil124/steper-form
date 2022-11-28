@@ -23,3 +23,6 @@
 table tr{
     border-width: 3px;
 }
+table tr th,table tr td{
+    border-width: 3px;
+}

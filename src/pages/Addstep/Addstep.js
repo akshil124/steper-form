@@ -1,13 +1,15 @@
 import React from "react";
 import {Dropdown, Space, Menu} from 'antd';
-import {PlusOutlined, FileTextOutlined,OrderedListOutlined,FileImageOutlined,TableOutlined} from "@ant-design/icons"
+import {PlusOutlined, FileTextOutlined,OrderedListOutlined,FileImageOutlined,TableOutlined,DoubleRightOutlined,MenuUnfoldOutlined} from "@ant-design/icons"
 import {useSelector, useDispatch} from 'react-redux'
-import {increment, addinputes,addlist,uploadimg,addtable} from "../../raducer/steper-count";
+import {increment, addinputes,addlist,uploadimg,addtable,addquote,addaccodion} from "../../raducer/steper-count";
 import Inputs from "../../components/Input/input";
 import List from "../../components/list/list";
 import Uploads from "../../components/upload/upload";
 import Table from "../../components/table/table"
 import './Addstep.css'
+import Quote from "../../components/quote/quote";
+import Accordion from "../../components/accordion/accordion";
 
 function Addstep() {
     const steps = useSelector((state) => state?.stepcounter)
@@ -24,7 +26,6 @@ function Addstep() {
     let items = []
     const AddStep=(data,index,mainindex)=>{
         const {type,value,placeholder,lists,url} = data
-    console.log("step",data)
         if(type === "text" || type === "text" ||type === "h1" || type === "h2" || type === "h3" || type === "h4" || type === "h5" || type === "h6"){
             return  <Inputs type={type} key={index} value={value} placeholder={placeholder}  index2={mainindex} index={index}/>
         }
@@ -32,14 +33,18 @@ function Addstep() {
             return (
                 <div key={index}>
                     {lists.map((list,i)=>{
-                        return <List list={list} key={i} index={i} mainid={mainindex} secondid={index}/>
+                        return <List list={list} lists={lists} key={i} index={i} mainid={mainindex} type={type} secondid={index}/>
                     })}
                 </div>
             )
         }else if(type==="file"){
             return <Uploads key={index} data={data} mainid={mainindex} index={index} type={type} url={url}/>
         }else if(type==="table"){
-             return <Table key={index} mainid={mainindex} index={index} data={data} />
+             return <Table key={index} mainid={mainindex} index={index} type={type} data={data} />
+        }else if(type === "quote"){
+            return <Quote key={index} mainid={mainindex} index={index} type={type} data={data}/>
+        }else if(type==="accordion"){
+            return <Accordion key={index} mainid={mainindex} index={index} type={type} data={data}/>
         }
     }
 
@@ -80,9 +85,19 @@ function Addstep() {
                                     label: <span className={"btn dropdown"}
                                                  onClick={() => dispatch(addtable({index:i,type:"table"}))}><TableOutlined className="me-1"/>Table</span>,
                                     key: '5',
-                                }
+                                },
+                                {
+                                    label: <span className={"btn dropdown"}
+                                                 onClick={() => dispatch(addquote({index:i,type:"quote"}))}><DoubleRightOutlined className="me-1"/>Quote</span>,
+                                    key: '6',
+                                },
+                                {
+                                    label: <span className={"btn dropdown"}
+                                                 onClick={() => dispatch(addaccodion({index:i,type:"accordion"}))}><MenuUnfoldOutlined className="me-1"/>Accodion</span>,
+                                    key: '7',
+                                },
                             ]
-                        }} trigger={['hover']}>
+                        }} trigger={['hover']} overlayClassName="set-scroll">
                             <a onClick={e => e.preventDefault()}>
                                 <Space>
                                     <PlusOutlined className="add-on"/>

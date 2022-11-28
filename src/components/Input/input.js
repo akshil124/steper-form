@@ -22,6 +22,27 @@ export default function Inputs(props) {
                      onClick={() => {dispach(downshift({index: props?.index, mainid: props?.index2,data:{type:props.type,value:props?.value,placeholder:props?.placeholder}}))}}><ArrowDownOutlined /></span>,
         key: '2',}
     ]
+    
+    // function getSelectionText() {
+    //     let text = "";
+    //     let activeEl = document.activeElement;
+    //     let activeElTagName = activeEl ? activeEl.tagName.toLowerCase() : null;
+    //     if (
+    //         (activeElTagName == "textarea") || (activeElTagName == "input" &&
+    //         /^(?:text|search|password|tel|url)$/i.test(activeEl.type)) &&
+    //         (typeof activeEl.selectionStart == "number")
+    //     ) {
+    //         text = activeEl.value.slice(activeEl.selectionStart, activeEl.selectionEnd);
+    //     } else if (window.getSelection) {
+    //         text = window.getSelection().toString();
+    //     }
+    //     return text;
+    // }
+    //
+    // document.onmouseup = document.onkeyup = document.onselectionchange = function() {
+    //     console.log("hiii",getSelectionText())
+    // };
+
     return (
         <div className="dropdown-box">
             <Dropdown menu={{

@@ -1,4 +1,7 @@
+import {retry} from "@reduxjs/toolkit/query";
+
 export default function RenderElement(props) {
+    console.log("props",props)
     switch (props?.type) {
         case "text" : return <p className={'mb-2'}>{props?.value}</p>
         case "h1" : return <h1 className={'mb-2'}>{props?.value}</h1>
@@ -7,11 +10,11 @@ export default function RenderElement(props) {
         case "h4" : return <h4 className={'mb-2'}>{props?.value}</h4>
         case "h5" : return <h5 className={'mb-2'}>{props?.value}</h5>
         case "h6" : return <h6 className={'mb-2'}>{props?.value}</h6>
-        case "list" : return props.list.map((list)=>{
-                                return <p>{list?.value}</p>
-                             })
-        case "file" : return <div><img src={props?.url} width={"500px"} height={"300px"}/></div>
-        case "table" : return   <table border={1} className="w-50">
+        case "list" : return <div className='mb-2'>{props.list.map((list)=>{
+                                return <p className="mb-0">{list?.value}</p>
+                             })}</div>
+        case "file" : return <div><img src={props?.url} width={"500px"} className="mb-2" height={"300px"}/></div>
+        case "table" : return   <table border={1} className="w-50 mb-2">
                                     {props?.table.map((column)=>{
                                         return <tr>{column.row.map((row)=>{
                                             if(column?.type==="th"){
@@ -22,6 +25,7 @@ export default function RenderElement(props) {
                                         })}</tr>
                                     })}
                                 </table>
+        case "quote" : return <div className="text-end"><h4 className="mb-0">"{props?.quote.quote}"</h4><p>-{props?.quote.caption}</p></div>
 
         default : break
     }
