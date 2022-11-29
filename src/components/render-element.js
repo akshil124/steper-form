@@ -1,13 +1,6 @@
 import React from 'react';
 import {Collapse, Radio} from 'antd';
-import Editor from "react-simple-code-editor";
-import {highlight, languages} from "prismjs/components/prism-core";
-import "prismjs/components/prism-clike";
-import "prismjs/components/prism-javascript";
-import "prismjs/themes/prism.css";
-import {addchecklistvalue, changecodevalue} from "../raducer/steper-count";
 import CodeEditor from "@uiw/react-textarea-code-editor";
-import {useDispatch} from "react-redux";
 
 const { Panel } = Collapse;
 
@@ -46,6 +39,7 @@ export default function RenderElement(props) {
         case "code" : return  <CodeEditor
                                     value={props?.data?.value}
                                     language="jsx"
+                                    claaName="mb-2"
                                     placeholder="Please enter code."
                                     padding={15}
                                     style={{

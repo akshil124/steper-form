@@ -1,14 +1,9 @@
 import React, { useState } from "react";
-import Editor from "react-simple-code-editor";
 import CodeEditor from '@uiw/react-textarea-code-editor';
-import { highlight, languages } from "prismjs/components/prism-core";
 import {changecodevalue, deleteinput, downshift, upshift} from "../../raducer/steper-count"
 import {useDispatch, useSelector} from "react-redux";
 import {Dropdown, Space} from "antd";
 import {ArrowDownOutlined, ArrowUpOutlined, CloseOutlined, MoreOutlined} from "@ant-design/icons";
-import "prismjs/components/prism-clike";
-import "prismjs/components/prism-javascript";
-import "prismjs/themes/prism.css";
 
 export default function Code(props) {
     const {data,mainid,index} = props
