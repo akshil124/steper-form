@@ -38,7 +38,7 @@ export default function Table(props) {
         <div>
             {
                 table?.map((l,i)=>{
-                    return  <div className={""}>
+                    return  <div className={""} key={i}>
                         {l?.row.map((row,index)=>{
                             return <input key={index} className={l?.row.length === 4 ?"set-table":l?.row.length >4 ?"set-table-input":""} value={row?.value} onChange={e=>dispach(addtablevalue({stateid:stateid,commanid:commanid,tableid:i,rowid:index,value:e.target.value}))}/>
                         })}

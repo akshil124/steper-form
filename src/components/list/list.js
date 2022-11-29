@@ -1,12 +1,14 @@
-import {addlistvalue, addlistinput, removelistinput, upshift, deleteinput, downshift} from "../../raducer/steper-count"
+import {addlistvalue, addlistinput, removelistinput, upshift, deleteinput, downshift,addchecklistinput,removechecklistinput,addchecklistvalue} from "../../raducer/steper-count"
 import "./list.css"
 import {useDispatch, useSelector} from "react-redux";
 import React, {useEffect} from "react";
-import {Dropdown, Space} from "antd";
+import {Dropdown, Space,Input,Radio } from "antd";
 import {ArrowDownOutlined, ArrowUpOutlined, CloseOutlined, MoreOutlined} from "@ant-design/icons";
+import Inputs from "../Input/input";
+import {type} from "@testing-library/user-event/dist/type";
 export default function List(props) {
     const dispach = useDispatch()
-    const {count,value,}=props?.list
+    const {count,value,check}=props?.list
     const{mainid,secondid,index,}=props
     const state = useSelector(state => state.stepcounter[mainid].comman)
 
@@ -24,15 +26,24 @@ export default function List(props) {
 
 
     const input = (event) =>{
-        if(event.key==="Enter"){
-            dispach(addlistinput({mainid:mainid,secondid:secondid}))
-        }else if(event.target.value === '') {
-            dispach(removelistinput({mainid:mainid,secondid:secondid,index:index}))
+        if(props?.type==="checklist"){
+            if(event.key==="Enter"){
+                dispach(addchecklistinput({mainid:mainid,secondid:secondid}))
+            }else if(event.target.value === '' && event.key==="Backspace") {
+                dispach(removechecklistinput({mainid:mainid,secondid:secondid,index:index}))
+            }else {
+                dispach(addchecklistvalue({mainid:mainid,secondid:secondid,index:index,value:event.target.value,dataname:"value"}))
+            }
         }else {
-            dispach(addlistvalue({mainid:mainid,secondid:secondid,index:index,value:event.target.value}))
+            if(event.key==="Enter"){
+                dispach(addlistinput({mainid:mainid,secondid:secondid}))
+            }else if(event.target.value === '' && event.key==="Backspace") {
+                dispach(removelistinput({mainid:mainid,secondid:secondid,index:index}))
+            }else {
+                dispach(addlistvalue({mainid:mainid,secondid:secondid,index:index,value:event.target.value}))
+            }
         }
     }
-
     return(
         <div className="dropdown-box">
             <Dropdown menu={{
@@ -44,7 +55,7 @@ export default function List(props) {
                     </Space>
                 </a>
             </Dropdown>
-            <input className="list-input ms-3" defaultValue={value} autoFocus={true} onKeyDown={input}/>
+            <div className={props?.type==="checklist"?"d-flex align-items-center":"w-100"}>{props?.type==="checklist"?<Radio className="me-0" onClick={()=>dispach(addchecklistvalue({mainid:mainid,secondid:secondid,index:index,dataname:"check",value:!check}))} size="large" checked={check} />:null}<Input className="list-input" size="large" value={value} autoFocus={true} onChange={(event)=>input(event)} onKeyDown={(event)=>input(event)}/></div>
         </div>
     )
 }

@@ -1,8 +1,8 @@
 import React from "react";
 import {Dropdown, Space, Menu} from 'antd';
-import {PlusOutlined, FileTextOutlined,OrderedListOutlined,FileImageOutlined,TableOutlined,DoubleRightOutlined,MenuUnfoldOutlined} from "@ant-design/icons"
+import {PlusOutlined, FileTextOutlined,OrderedListOutlined,FileImageOutlined,TableOutlined,DoubleRightOutlined,MenuUnfoldOutlined,CodepenOutlined,CheckCircleOutlined} from "@ant-design/icons"
 import {useSelector, useDispatch} from 'react-redux'
-import {increment, addinputes,addlist,uploadimg,addtable,addquote,addaccodion} from "../../raducer/steper-count";
+import {increment, addinputes,addlist,uploadimg,addtable,addquote,addaccodion,addcode,addchecklist} from "../../raducer/steper-count";
 import Inputs from "../../components/Input/input";
 import List from "../../components/list/list";
 import Uploads from "../../components/upload/upload";
@@ -10,6 +10,7 @@ import Table from "../../components/table/table"
 import './Addstep.css'
 import Quote from "../../components/quote/quote";
 import Accordion from "../../components/accordion/accordion";
+import Code from "../../components/code/code";
 
 function Addstep() {
     const steps = useSelector((state) => state?.stepcounter)
@@ -32,7 +33,7 @@ function Addstep() {
         else if(type ==="list"){
             return (
                 <div key={index}>
-                    {lists.map((list,i)=>{
+                    {lists?.map((list,i)=>{
                         return <List list={list} lists={lists} key={i} index={i} mainid={mainindex} type={type} secondid={index}/>
                     })}
                 </div>
@@ -45,6 +46,16 @@ function Addstep() {
             return <Quote key={index} mainid={mainindex} index={index} type={type} data={data}/>
         }else if(type==="accordion"){
             return <Accordion key={index} mainid={mainindex} index={index} type={type} data={data}/>
+        }else if (type==="code"){
+            return <Code  key={index} mainid={mainindex} index={index} data={data} />
+        }else if(type==="checklist"){
+            return (
+                <div key={index}>
+                    {lists?.map((list,i)=>{
+                        return <List list={list} lists={lists} key={i} index={i} mainid={mainindex} type={type} secondid={index}/>
+                    })}
+                </div>
+            )
         }
     }
 
@@ -95,6 +106,16 @@ function Addstep() {
                                     label: <span className={"btn dropdown"}
                                                  onClick={() => dispatch(addaccodion({index:i,type:"accordion"}))}><MenuUnfoldOutlined className="me-1"/>Accodion</span>,
                                     key: '7',
+                                },
+                                {
+                                    label: <span className={"btn dropdown"}
+                                                 onClick={() => dispatch(addcode({index:i,type:"code"}))}><CodepenOutlined className="me-1"/>Code</span>,
+                                    key: '8',
+                                },
+                                {
+                                    label: <span className={"btn dropdown"}
+                                                 onClick={() => dispatch(addchecklist({index:i,type:"checklist"}))}><CheckCircleOutlined className="me-1"/>Check list</span>,
+                                    key: '9',
                                 },
                             ]
                         }} trigger={['hover']} overlayClassName="set-scroll">

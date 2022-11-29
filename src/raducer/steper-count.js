@@ -165,11 +165,50 @@ const initialState = [{
                 value:"",
                 mainvalue:""
             })
+        },
+        addcode:(state,action)=>{
+            const {index,type}=action.payload
+            state[index].comman.push({
+                type:type,
+                value : ``
+            })
+        },
+        changecodevalue:(state,action)=>{
+            const {mainid,index,value} = action.payload
+            state[mainid].comman[index].value = value
+        },
+        addchecklist:(state,action)=>{
+            const {index,type}=action.payload
+            state[index].comman.push({
+                type:type,
+                lists:[
+                    {check:false,value:""}
+                ]
+            })
+        },
+        addchecklistinput:(state,action)=>{
+            const {mainid,secondid}=action.payload
+            state[mainid].comman[secondid].lists.push({
+                check:false,
+                value:""
+            })
+        },
+        removechecklistinput:(state,action)=>{
+            const {mainid,secondid,index}=action.payload
+            state[mainid].comman[secondid].lists.splice(index,1)
+        },
+        addchecklistvalue:(state,action)=>{
+            const {mainid,secondid,index,value,dataname}=action.payload
+            state[mainid].comman[secondid].lists[index] = {...state[mainid].comman[secondid].lists[index],
+            [dataname]:value
+            }
         }
     },
 })
 
 // Action creators are generated for each case reducer function
-export const {increment,addinputes,Inputvalues,deleteinput,upshift,downshift,addlist,addlistvalue,addlistinput,removelistinput,uploadimg,addimgurl ,addtable,addtablevalue,addtablerow,addtablecolumn,addquote,changequote,addaccodion,changeaccordionvalue,addsubaccodion} = stepcounter.actions
+export const {increment,addinputes,Inputvalues,deleteinput,upshift,downshift,addlist,addlistvalue,addlistinput,removelistinput,uploadimg,addimgurl ,
+    addtable,addtablevalue,addtablerow,addtablecolumn, addquote,changequote,addaccodion,changeaccordionvalue,addsubaccodion,addcode,changecodevalue,addchecklist,addchecklistinput,
+    removechecklistinput,addchecklistvalue} = stepcounter.actions
 
 export default stepcounter.reducer

@@ -48,7 +48,6 @@ export default function Uploads(props) {
         setLoading(false)
         dipatch(addimgurl({url: fileUrl, mainid: props?.mainid, index: props?.index}))
         alert(`File uploaded! ${fileUrl}`);
-        console.log("url", fileUrl)
     };
 
     if (props?.data?.url) {
